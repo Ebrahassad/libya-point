@@ -44,3 +44,4 @@ app.*.map.json
 .widget_preview/
 android/keystore/
 android/key.properties
+android/upload-keystore.jks
