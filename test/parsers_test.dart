@@ -151,7 +151,7 @@ void main() {
     expect(a.interstitialEvery, 3);
     expect(a.minSecondsBetween, 90);
     expect(a.dailyCap, 12);
-    expect(a.bannerPlacement, 'Banner_Android');
+    expect(a.bannerPlacement, 'BP_Banner_Android');
     expect(AdSettings.fromJson({'gameId': 'abc'}).active, isFalse);
     expect(
       AdSettings.fromJson({'gameId': '1234567', 'enabled': false}).active,

@@ -48,7 +48,8 @@ jobs:
       - name: Build Release APK
         run: |
           flutter build apk --release \
-            --dart-define=CONTACT_EMAIL=${{ secrets.CONTACT_EMAIL }}
+            --dart-define=CONTACT_EMAIL=${{ secrets.CONTACT_EMAIL }} \
+            --dart-define=UNITY_GAME_ID=${{ secrets.UNITY_GAME_ID }}
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
