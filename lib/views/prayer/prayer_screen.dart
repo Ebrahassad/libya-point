@@ -115,9 +115,8 @@ class _PrayerScreenState extends State<PrayerScreen> {
                             borderRadius: BorderRadius.circular(12),
                             side: k == next
                                 ? BorderSide(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primary,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                     width: 1.5,
                                   )
                                 : BorderSide.none,

@@ -18,17 +18,26 @@ String _gnews(String query, {String lang = 'ar', String country = 'LY'}) =>
 final List<NewsSource> defaultNewsSources = [
   NewsSource('أخبار ليبيا', [_gnews('ليبيا when:1d')], limit: 25),
   NewsSource('عاجل', [_gnews('ليبيا عاجل when:1d')], limit: 15),
-  NewsSource('طرابلس وبنغازي', [
-    _gnews('طرابلس OR بنغازي OR مصراتة OR سبها when:2d'),
-  ], limit: 15),
-  NewsSource('اقتصاد', [
-    _gnews(
-      'الدينار الليبي OR مصرف ليبيا المركزي OR المؤسسة الوطنية للنفط when:3d',
-    ),
-  ], limit: 15),
-  NewsSource('Libya News', [
-    _gnews('Libya when:1d', lang: 'en', country: 'US'),
-  ], limit: 12),
+  NewsSource(
+      'طرابلس وبنغازي',
+      [
+        _gnews('طرابلس OR بنغازي OR مصراتة OR سبها when:2d'),
+      ],
+      limit: 15),
+  NewsSource(
+      'اقتصاد',
+      [
+        _gnews(
+          'الدينار الليبي OR مصرف ليبيا المركزي OR المؤسسة الوطنية للنفط when:3d',
+        ),
+      ],
+      limit: 15),
+  NewsSource(
+      'Libya News',
+      [
+        _gnews('Libya when:1d', lang: 'en', country: 'US'),
+      ],
+      limit: 12),
 
   // ------------------------- مصادر رسمية -------------------------
   NewsSource(
@@ -151,29 +160,50 @@ final List<NewsSource> defaultNewsSources = [
   ),
 
   // ------------------------- إعلام مستقل -------------------------
-  const NewsSource('عين ليبيا', [
-    'https://www.eanlibya.com/feed/',
-  ], site: 'https://www.eanlibya.com/'),
-  const NewsSource('ليبيا هيرالد', [
-    'https://libyaherald.com/feed',
-  ], site: 'https://libyaherald.com/'),
-  const NewsSource('بوابة الوسط', [
-    'https://alwasat.ly/rss',
-    'https://alwasat.ly/feed',
-  ], site: 'https://alwasat.ly/'),
-  const NewsSource('ليبيا أوبزرفر', [
-    'https://www.libyaobserver.ly/rss.xml',
-    'https://www.libyaobserver.ly/feed',
-  ], site: 'https://www.libyaobserver.ly/'),
-  const NewsSource('ليبيا ريفيو', [
-    'https://libyareview.com/feed/',
-  ], site: 'https://libyareview.com/'),
-  const NewsSource('المرصد', [
-    'https://almarsad.co/feed/',
-  ], site: 'https://almarsad.co/'),
-  const NewsSource('ليبيا الأحرار', [
-    'https://libyaalahrar.net/feed/',
-  ], site: 'https://libyaalahrar.net/'),
+  const NewsSource(
+      'عين ليبيا',
+      [
+        'https://www.eanlibya.com/feed/',
+      ],
+      site: 'https://www.eanlibya.com/'),
+  const NewsSource(
+      'ليبيا هيرالد',
+      [
+        'https://libyaherald.com/feed',
+      ],
+      site: 'https://libyaherald.com/'),
+  const NewsSource(
+      'بوابة الوسط',
+      [
+        'https://alwasat.ly/rss',
+        'https://alwasat.ly/feed',
+      ],
+      site: 'https://alwasat.ly/'),
+  const NewsSource(
+      'ليبيا أوبزرفر',
+      [
+        'https://www.libyaobserver.ly/rss.xml',
+        'https://www.libyaobserver.ly/feed',
+      ],
+      site: 'https://www.libyaobserver.ly/'),
+  const NewsSource(
+      'ليبيا ريفيو',
+      [
+        'https://libyareview.com/feed/',
+      ],
+      site: 'https://libyareview.com/'),
+  const NewsSource(
+      'المرصد',
+      [
+        'https://almarsad.co/feed/',
+      ],
+      site: 'https://almarsad.co/'),
+  const NewsSource(
+      'ليبيا الأحرار',
+      [
+        'https://libyaalahrar.net/feed/',
+      ],
+      site: 'https://libyaalahrar.net/'),
 ];
 
 List<NewsSource> get newsSources => ContentStore.instance.newsSources;

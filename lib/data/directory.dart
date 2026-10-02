@@ -22,34 +22,34 @@ class DirAction {
   final IconData iconData;
 
   const DirAction.web(this.label, this.url, {this.iconData = Icons.open_in_new})
-    : kind = LinkKind.web,
-      package = null,
-      phone = null,
-      searchName = null;
+      : kind = LinkKind.web,
+        package = null,
+        phone = null,
+        searchName = null;
 
   const DirAction.app(
     this.label, {
     this.package,
     this.searchName,
     this.iconData = Icons.download,
-  }) : kind = LinkKind.app,
-       url = null,
-       phone = null;
+  })  : kind = LinkKind.app,
+        url = null,
+        phone = null;
 
   const DirAction.phone(this.label, this.phone, {this.iconData = Icons.call})
-    : kind = LinkKind.phone,
-      url = null,
-      package = null,
-      searchName = null;
+      : kind = LinkKind.phone,
+        url = null,
+        package = null,
+        searchName = null;
 
   const DirAction.email(
     this.label,
     this.url, {
     this.iconData = Icons.email_outlined,
-  }) : kind = LinkKind.email,
-       package = null,
-       phone = null,
-       searchName = null;
+  })  : kind = LinkKind.email,
+        package = null,
+        phone = null,
+        searchName = null;
 
   Uri get uri {
     switch (kind) {
@@ -102,10 +102,10 @@ class DirItem {
     this.sourceUrl,
     this.verifiedAt,
     this.tag,
-  }) : kind = LinkKind.web,
-       package = null,
-       phone = null,
-       searchName = null;
+  })  : kind = LinkKind.web,
+        package = null,
+        phone = null,
+        searchName = null;
 
   const DirItem.app(
     this.title,
@@ -119,9 +119,9 @@ class DirItem {
     this.sourceUrl,
     this.verifiedAt,
     this.tag,
-  }) : kind = LinkKind.app,
-       url = null,
-       phone = null;
+  })  : kind = LinkKind.app,
+        url = null,
+        phone = null;
 
   const DirItem.phone(
     this.title,
@@ -134,10 +134,10 @@ class DirItem {
     this.sourceUrl,
     this.verifiedAt,
     this.tag,
-  }) : kind = LinkKind.phone,
-       url = null,
-       package = null,
-       searchName = null;
+  })  : kind = LinkKind.phone,
+        url = null,
+        package = null,
+        searchName = null;
 
   /// مفتاح فريد للمفضلة. عند توفير id يصبح هو المرجع الثابت حتى لو تغير الاسم.
   String get key => id ?? '${kind.name}|$title';
@@ -401,7 +401,8 @@ final List<DirSection> defaultSections = [
         'https://economy.gov.ly/',
         id: 'state-economy',
         official: true,
-        source: 'وزارة الاقتصاد والتجارة - بيانات الاتصال عبر منظومة إجراءات حكومية',
+        source:
+            'وزارة الاقتصاد والتجارة - بيانات الاتصال عبر منظومة إجراءات حكومية',
         sourceUrl: 'https://ejraat.gov.ly/Contacts/21?l=ar',
         verifiedAt: _verified,
         tag: 'state',
@@ -991,7 +992,8 @@ final List<DirSection> defaultSections = [
           const DirAction.app('مصرفي أعمال', package: 'com.mitt.Jumbusiness'),
           const DirAction.app('مصرفي باي', package: 'ly.mitf.musrefypay'),
         ],
-        serviceUrl: 'https://www.jbank.ly/ar/e-service/electronic-services/masrifi-plus/',
+        serviceUrl:
+            'https://www.jbank.ly/ar/e-service/electronic-services/masrifi-plus/',
         serviceLabel: 'مصرفي بلس',
       ),
       _bank(
@@ -1151,7 +1153,8 @@ final List<DirSection> defaultSections = [
         phone: '+218213623501',
         appName: 'Al Yaqeen Bank',
         package: 'com.profinch.yaqeen',
-        serviceUrl: 'https://play.google.com/store/apps/details?id=com.yaqeen_mastercard',
+        serviceUrl:
+            'https://play.google.com/store/apps/details?id=com.yaqeen_mastercard',
         serviceLabel: 'Yaqeen Mastercard',
       ),
       _bank(
@@ -1873,9 +1876,9 @@ String sectionSubtitle(DirSection s) {
 }
 
 List<DirItem> allDirectoryItems() => [
-  for (final s in directorySections)
-    for (final g in s.groups) ...g.items,
-];
+      for (final s in directorySections)
+        for (final g in s.groups) ...g.items,
+    ];
 
 DirSection? sectionById(String id) {
   for (final s in directorySections) {
@@ -1987,11 +1990,11 @@ const List<NearbyKind> nearbyKinds = [
 ];
 
 Uri mapsSearchUri(String query, String city) => Uri.parse(
-  'https://www.google.com/maps/search/?api=1&query=${Uri.encodeComponent('$query، $city، ليبيا')}',
-);
+      'https://www.google.com/maps/search/?api=1&query=${Uri.encodeComponent('$query، $city، ليبيا')}',
+    );
 
 /// كل عناصر الدليل + الفنادق للبحث والمفضلة.
 List<DirItem> allSearchableItems() => [
-  ...allDirectoryItems(),
-  ...hotelSearchItems(),
-];
+      ...allDirectoryItems(),
+      ...hotelSearchItems(),
+    ];

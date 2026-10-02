@@ -85,12 +85,10 @@ class ContentStore extends ChangeNotifier {
 
   Future<void> refresh() async {
     try {
-      final r = await http
-          .get(
-            Uri.parse(AppConfig.contentUrl),
-            headers: {'Accept': 'application/json'},
-          )
-          .timeout(const Duration(seconds: 15));
+      final r = await http.get(
+        Uri.parse(AppConfig.contentUrl),
+        headers: {'Accept': 'application/json'},
+      ).timeout(const Duration(seconds: 15));
       if (r.statusCode != 200) return;
       final body = utf8.decode(r.bodyBytes, allowMalformed: true);
       if (apply(body)) {

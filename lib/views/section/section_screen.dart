@@ -26,12 +26,12 @@ class _SectionScreenState extends State<SectionScreen> {
   String _q = '';
 
   bool get _adFreeSection => const {
-    'state',
-    'citizen',
-    'banks',
-    'complaints',
-    'emergency',
-  }.contains(widget.section.id);
+        'state',
+        'citizen',
+        'banks',
+        'complaints',
+        'emergency',
+      }.contains(widget.section.id);
 
   @override
   Widget build(BuildContext context) {

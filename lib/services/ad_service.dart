@@ -186,9 +186,8 @@ class AdService extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       final today = _today();
-      final count = prefs.getString(_kDay) == today
-          ? (prefs.getInt(_kCount) ?? 0)
-          : 0;
+      final count =
+          prefs.getString(_kDay) == today ? (prefs.getInt(_kCount) ?? 0) : 0;
       await prefs.setString(_kDay, today);
       await prefs.setInt(_kCount, count + 1);
     } catch (_) {}

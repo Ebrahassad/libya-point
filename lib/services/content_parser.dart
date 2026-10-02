@@ -110,8 +110,8 @@ DirItem? parseDirItem(Object? raw) {
       final primary = _urlRe.hasMatch(u)
           ? u
           : (actions.isNotEmpty && actions.first.kind == LinkKind.web
-                ? actions.first.url
-                : null);
+              ? actions.first.url
+              : null);
       if (primary == null) return null;
       return DirItem.web(
         title,
@@ -147,8 +147,8 @@ DirItem? parseDirItem(Object? raw) {
       final primary = _phoneRe.hasMatch(p)
           ? p
           : (actions.isNotEmpty && actions.first.kind == LinkKind.phone
-                ? actions.first.phone
-                : null);
+              ? actions.first.phone
+              : null);
       if (primary == null) return null;
       return DirItem.phone(
         title,

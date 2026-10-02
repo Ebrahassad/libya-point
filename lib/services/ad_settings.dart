@@ -50,21 +50,21 @@ class AdSettings {
   });
 
   factory AdSettings.defaults() => const AdSettings(
-    enabled: true,
-    banner: true,
-    interstitial: true,
-    rewarded: true,
-    testMode: AppConfig.unityTestMode,
-    gameId: AppConfig.unityGameId,
-    bannerPlacement: 'Banner_Android',
-    interstitialPlacement: 'Interstitial_Android',
-    rewardedPlacement: 'Rewarded_Android',
-    interstitialEvery: 5,
-    minSecondsBetween: 240,
-    firstAdAfterSeconds: 120,
-    dailyCap: 6,
-    adFreeHours: 24,
-  );
+        enabled: true,
+        banner: true,
+        interstitial: true,
+        rewarded: true,
+        testMode: AppConfig.unityTestMode,
+        gameId: AppConfig.unityGameId,
+        bannerPlacement: 'Banner_Android',
+        interstitialPlacement: 'Interstitial_Android',
+        rewardedPlacement: 'Rewarded_Android',
+        interstitialEvery: 5,
+        minSecondsBetween: 240,
+        firstAdAfterSeconds: 120,
+        dailyCap: 6,
+        adFreeHours: 24,
+      );
 
   /// هل الإعلانات مفعّلة فعلاً (يوجد Game ID صالح).
   bool get active => enabled && _gameIdRe.hasMatch(gameId);

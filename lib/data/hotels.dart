@@ -50,8 +50,8 @@ const List<DirItem> hotelSources = [
 
 /// رابط بحث الفنادق في مدينة على Booking.
 Uri bookingSearchUri(String city) => Uri.parse(
-  'https://www.booking.com/searchresults.ar.html?ss=${Uri.encodeComponent('$city، ليبيا')}',
-);
+      'https://www.booking.com/searchresults.ar.html?ss=${Uri.encodeComponent('$city، ليبيا')}',
+    );
 
 /// الفنادق المضمّنة. المحتوى البعيد (content.json) يمكنه استبدال القائمة.
 const List<Hotel> defaultHotels = [
@@ -72,7 +72,8 @@ const List<Hotel> defaultHotels = [
     note: 'شارع الفتح، على الكورنيش.',
     phone: '+218213407878',
     phoneLabel: '021-3407878',
-    web: 'https://www.radissonhotels.com/ar-ae/hotels/radisson-blu-tripoli-al-mahary',
+    web:
+        'https://www.radissonhotels.com/ar-ae/hotels/radisson-blu-tripoli-al-mahary',
   ),
   Hotel(
     'الفندق الكبير',
@@ -168,10 +169,10 @@ List<Hotel> hotelsInCity(String city) =>
 
 /// كل الفنادق كعناصر قابلة للبحث والمفضلة (الفتح على الخريطة).
 List<DirItem> hotelSearchItems() => [
-  for (final h in libyaHotels)
-    DirItem.web(
-      'فندق: ${h.name} - ${h.city}',
-      h.note.isEmpty ? 'افتح موقعه على خرائط جوجل.' : h.note,
-      h.mapsUri.toString(),
-    ),
-];
+      for (final h in libyaHotels)
+        DirItem.web(
+          'فندق: ${h.name} - ${h.city}',
+          h.note.isEmpty ? 'افتح موقعه على خرائط جوجل.' : h.note,
+          h.mapsUri.toString(),
+        ),
+    ];

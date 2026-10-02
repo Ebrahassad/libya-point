@@ -17,22 +17,22 @@ class CblRate {
   );
 
   Map<String, dynamic> toJson() => {
-    'date': date,
-    'name': name,
-    'unit': unit,
-    'avg': average,
-    'sell': sell,
-    'buy': buy,
-  };
+        'date': date,
+        'name': name,
+        'unit': unit,
+        'avg': average,
+        'sell': sell,
+        'buy': buy,
+      };
 
   factory CblRate.fromJson(Map<String, dynamic> j) => CblRate(
-    j['date'] as String,
-    j['name'] as String,
-    j['unit'] as String,
-    (j['avg'] as num).toDouble(),
-    (j['sell'] as num?)?.toDouble(),
-    (j['buy'] as num?)?.toDouble(),
-  );
+        j['date'] as String,
+        j['name'] as String,
+        j['unit'] as String,
+        (j['avg'] as num).toDouble(),
+        (j['sell'] as num?)?.toDouble(),
+        (j['buy'] as num?)?.toDouble(),
+      );
 }
 
 class ParallelRate {
@@ -53,18 +53,18 @@ class NewsItem {
   const NewsItem(this.title, this.link, this.source, this.date);
 
   Map<String, dynamic> toJson() => {
-    'title': title,
-    'link': link,
-    'source': source,
-    'date': date?.toIso8601String(),
-  };
+        'title': title,
+        'link': link,
+        'source': source,
+        'date': date?.toIso8601String(),
+      };
 
   factory NewsItem.fromJson(Map<String, dynamic> j) => NewsItem(
-    j['title'] as String,
-    j['link'] as String,
-    j['source'] as String,
-    j['date'] == null ? null : DateTime.tryParse(j['date'] as String),
-  );
+        j['title'] as String,
+        j['link'] as String,
+        j['source'] as String,
+        j['date'] == null ? null : DateTime.tryParse(j['date'] as String),
+      );
 }
 
 String decodeEntities(String s) {
@@ -232,8 +232,7 @@ List<NewsItem> parseFeed(String xml, String source, {int limit = 12}) {
       }
     }
     if (title.isEmpty) continue;
-    final dateRaw =
-        _tag(block, 'pubDate') ??
+    final dateRaw = _tag(block, 'pubDate') ??
         _tag(block, 'updated') ??
         _tag(block, 'published');
     out.add(

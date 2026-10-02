@@ -35,9 +35,8 @@ class EmergencyScreen extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.warning_amber_rounded,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onErrorContainer,
+                            color:
+                                Theme.of(context).colorScheme.onErrorContainer,
                           ),
                           const SizedBox(width: 8),
                           Expanded(
@@ -88,8 +87,8 @@ class EmergencyScreen extends StatelessWidget {
                       backgroundColor: n.official
                           ? Theme.of(context).colorScheme.primaryContainer
                           : Theme.of(context)
-                                .colorScheme
-                                .surfaceContainerHighest,
+                              .colorScheme
+                              .surfaceContainerHighest,
                       child: Icon(
                         Icons.call,
                         color: n.official

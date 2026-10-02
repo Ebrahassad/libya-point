@@ -118,10 +118,8 @@ class HotelsScreen extends StatelessWidget {
   }
 
   static int _regionCount(String region) {
-    final names = libyaCities
-        .where((c) => c.region == region)
-        .map((c) => c.name)
-        .toSet();
+    final names =
+        libyaCities.where((c) => c.region == region).map((c) => c.name).toSet();
     return libyaHotels.where((h) => names.contains(h.city)).length;
   }
 }
