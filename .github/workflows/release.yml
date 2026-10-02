@@ -48,7 +48,6 @@ jobs:
       - name: Build Release APK
         run: |
           flutter build apk --release \
-            --dart-define=OIL_API_KEY=${{ secrets.OIL_API_KEY }} \
             --dart-define=CONTACT_EMAIL=${{ secrets.CONTACT_EMAIL }}
 
       - name: Upload APK Artifact

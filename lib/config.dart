@@ -1,10 +1,5 @@
-/// إعدادات التطبيق. القيم التي تبدأ بـ fromEnvironment تُمرَّر وقت البناء:
-///   flutter build apk --release --dart-define=OIL_API_KEY=xxxx
+/// إعدادات التطبيق. القيم التي تبدأ بـ fromEnvironment تُمرَّر وقت البناء.
 class AppConfig {
-  /// مفتاح اختياري من oilpriceapi.com. إن وُجد يظهر سعر برنت داخل التطبيق،
-  /// وإن لم يوجد تظهر بطاقة النفط بزر لفتح مصدر السعر فقط.
-  static const String oilApiKey = String.fromEnvironment('OIL_API_KEY');
-
   /// بريد استقبال طلبات إضافة المتاجر (شاشة أضف متجرك).
   static const String contactEmail = String.fromEnvironment('CONTACT_EMAIL');
 
@@ -16,7 +11,8 @@ class AppConfig {
   /// يجب أن يكون المستودع عاماً (public) ليقرأه التطبيق.
   static const String contentUrl = String.fromEnvironment(
     'CONTENT_URL',
-    defaultValue: 'https://raw.githubusercontent.com/Ebrahassad/libya_point/main/content/content.json',
+    defaultValue:
+        'https://raw.githubusercontent.com/Ebrahassad/libya_point/main/content/content.json',
   );
 
   /// إعلانات Unity Ads. القيم الحقيقية تُضاف لاحقاً بإحدى طريقتين (انظر README):

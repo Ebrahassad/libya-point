@@ -19,19 +19,19 @@ class CityWeather {
   const CityWeather(this.city, this.temp, this.code, this.wind, this.humidity);
 
   Map<String, dynamic> toJson() => {
-    'city': city,
-    'temp': temp,
-    'code': code,
-    'wind': wind,
-    'hum': humidity,
-  };
+        'city': city,
+        'temp': temp,
+        'code': code,
+        'wind': wind,
+        'hum': humidity,
+      };
   factory CityWeather.fromJson(Map<String, dynamic> j) => CityWeather(
-    j['city'] as String,
-    (j['temp'] as num).toDouble(),
-    (j['code'] as num).toInt(),
-    (j['wind'] as num).toDouble(),
-    (j['hum'] as num?)?.toDouble(),
-  );
+        j['city'] as String,
+        (j['temp'] as num).toDouble(),
+        (j['code'] as num).toInt(),
+        (j['wind'] as num).toDouble(),
+        (j['hum'] as num?)?.toDouble(),
+      );
 }
 
 /// حالة تحميل جزء من البيانات.
@@ -44,8 +44,10 @@ class LiveData extends ChangeNotifier {
   static const _cblUrl = 'https://cbl.gov.ly/currency-exchange-rates/';
   static const _parallelUrl = 'https://www.eanlibya.com/exchangerate/';
   static const _goldUrl = 'https://api.gold-api.com/price/XAU';
-  static const _oilUrl =
-      'https://api.oilpriceapi.com/v1/prices/latest?by_code=BRENT_CRUDE_USD';
+
+  /// المصدر الرسمي لأسعار النفط: المؤسسة الوطنية للنفط الليبية.
+  /// يعرض الموقع أسعار Brent وDubai وUrals وWTI وسلة OPEC.
+  static const _nocOilUrl = 'https://noc.ly/';
   static const _cacheKey = 'live_cache_v1';
   static const double _gramsPerOunce = 31.1034768;
 
@@ -65,7 +67,7 @@ class LiveData extends ChangeNotifier {
   LoadState weatherState = LoadState.idle;
   LoadState newsState = LoadState.idle;
 
-  bool get oilConfigured => AppConfig.oilApiKey.isNotEmpty;
+  bool get oilConfigured => true;
 
   Timer? _timer;
   bool _refreshing = false;
@@ -92,16 +94,14 @@ class LiveData extends ChangeNotifier {
 
   Future<String?> _get(String url, {Map<String, String>? headers}) async {
     try {
-      final r = await http
-          .get(
-            Uri.parse(url),
-            headers: {
-              'User-Agent': 'LibyaPoint/1.0 (Android)',
-              'Accept-Language': 'ar,en;q=0.8',
-              ...?headers,
-            },
-          )
-          .timeout(const Duration(seconds: 15));
+      final r = await http.get(
+        Uri.parse(url),
+        headers: {
+          'User-Agent': 'LibyaPoint/1.0 (Android)',
+          'Accept-Language': 'ar,en;q=0.8',
+          ...?headers,
+        },
+      ).timeout(const Duration(seconds: 15));
       if (r.statusCode == 200) {
         return utf8.decode(r.bodyBytes, allowMalformed: true);
       }
@@ -201,27 +201,69 @@ class LiveData extends ChangeNotifier {
   }
 
   Future<void> _refreshOil() async {
-    if (!oilConfigured) {
-      oil = LoadState.idle;
+    final body = await _get(_nocOilUrl);
+
+    if (body == null || body.isEmpty) {
+      oil = LoadState.failed;
+      notifyListeners();
       return;
     }
-    final body = await _get(
-      _oilUrl,
-      headers: {'Authorization': 'Token ${AppConfig.oilApiKey}'},
-    );
+
     try {
-      if (body != null) {
-        final j = jsonDecode(body) as Map<String, dynamic>;
-        final p = ((j['data'] as Map<String, dynamic>)['price'] as num?)
-            ?.toDouble();
-        if (p != null && p > 0) {
-          brentUsd = p;
-          oil = LoadState.ok;
-          notifyListeners();
-          return;
+      // NOC publishes the oil prices directly in the website HTML.
+      // Example:
+      // "أسعار النفط بتاريخ 30/09/2026 ... 120.440 $ برنت DT"
+      final text = body
+          .replaceAll(
+            RegExp(r'<script[\s\S]*?</script>', caseSensitive: false),
+            ' ',
+          )
+          .replaceAll(
+            RegExp(r'<style[\s\S]*?</style>', caseSensitive: false),
+            ' ',
+          )
+          .replaceAll(RegExp(r'<[^>]+>'), ' ')
+          .replaceAll(RegExp(r'&nbsp;', caseSensitive: false), ' ')
+          .replaceAll(RegExp(r'\s+'), ' ')
+          .trim();
+
+      // NOC page format:
+      // 120.440 $ برنت DT
+      // The price appears immediately before "$ برنت".
+      final patterns = <RegExp>[
+        RegExp(
+          r'([0-9]+(?:\.[0-9]+)?)\s*\$\s*برنت',
+          caseSensitive: false,
+        ),
+        RegExp(
+          r'([0-9]+(?:\.[0-9]+)?)\s*\$\s*Brent',
+          caseSensitive: false,
+        ),
+      ];
+
+      double? price;
+
+      for (final pattern in patterns) {
+        final match = pattern.firstMatch(text);
+
+        if (match == null) continue;
+
+        final value = double.tryParse(match.group(1)!);
+
+        if (value != null && value > 0) {
+          price = value;
+          break;
         }
       }
+
+      if (price != null) {
+        brentUsd = price;
+        oil = LoadState.ok;
+        notifyListeners();
+        return;
+      }
     } catch (_) {}
+
     oil = LoadState.failed;
     notifyListeners();
   }
@@ -240,9 +282,8 @@ class LiveData extends ChangeNotifier {
         final list = decoded is List ? decoded : [decoded];
         final map = <String, CityWeather>{};
         for (var i = 0; i < list.length && i < libyaCities.length; i++) {
-          final cur =
-              (list[i] as Map<String, dynamic>)['current']
-                  as Map<String, dynamic>?;
+          final cur = (list[i] as Map<String, dynamic>)['current']
+              as Map<String, dynamic>?;
           if (cur == null) continue;
           final t = (cur['temperature_2m'] as num?)?.toDouble();
           final code = (cur['weather_code'] as num?)?.toInt();
@@ -373,9 +414,8 @@ class LiveData extends ChangeNotifier {
         for (final e in (j['news'] as List? ?? []))
           NewsItem.fromJson(e as Map<String, dynamic>),
       ];
-      lastUpdated = j['at'] == null
-          ? null
-          : DateTime.tryParse(j['at'] as String);
+      lastUpdated =
+          j['at'] == null ? null : DateTime.tryParse(j['at'] as String);
       notifyListeners();
     } catch (_) {}
   }
