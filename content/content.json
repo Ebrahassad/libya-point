@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 2,
+  "updatedAt": "2026-10-02",
+  "notes": "Remote content is optional. Leave sections empty to keep the verified in-app directory. Add sections using the v2 links/source/verification schema before publishing changes.",
+  "sections": [],
+  "sections_remove": [],
+  "hotels": [],
+  "newsFeeds": [],
+  "announcement": null,
+  "update": null,
+  "aboutExtra": null
+}

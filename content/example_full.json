@@ -1,0 +1,93 @@
+{
+  "_readme": "مثال schemaVersion 2: يمكن للمحتوى البعيد إضافة بطاقات متعددة الروابط ومصادر التحقق. هذا الملف لا يقرأه التطبيق.",
+  "schemaVersion": 2,
+  "announcement": {
+    "id": "2026-10-oct-1",
+    "text": "تمت إضافة خدمات وروابط جديدة إلى الدليل.",
+    "url": "https://ebrahassad.github.io/Hassadi-Apps/#apps"
+  },
+  "update": {
+    "versionCode": 3,
+    "message": "إصدار جديد من ليبيا بوينت.",
+    "url": "https://play.google.com/store/apps/details?id=com.hassadi.libya_point"
+  },
+  "ads": {
+    "enabled": true,
+    "gameId": "1234567",
+    "testMode": true,
+    "bannerPlacement": "Banner_Android",
+    "interstitialPlacement": "Interstitial_Android",
+    "rewardedPlacement": "Rewarded_Android",
+    "banner": true,
+    "interstitial": true,
+    "rewarded": true,
+    "interstitialEvery": 5,
+    "minSecondsBetween": 240,
+    "firstAdAfterSeconds": 120,
+    "dailyCap": 6,
+    "adFreeHours": 24
+  },
+  "aboutExtra": "نص إضافي يظهر في شاشة نبذة عن التطبيق.",
+  "sections": [
+    {
+      "id": "services",
+      "title": "خدمات جديدة",
+      "subtitle": "مثال لإضافة جهة مع عدة روابط",
+      "icon": "build",
+      "color": "#455A64",
+      "groups": [
+        {
+          "title": "جهة رسمية",
+          "items": [
+            {
+              "type": "web",
+              "id": "example-service",
+              "title": "جهة مثال",
+              "desc": "موقع وخدمة وهاتف ومصدر تحقق في بطاقة واحدة.",
+              "url": "https://example.ly/",
+              "official": true,
+              "source": "الموقع الرسمي",
+              "sourceUrl": "https://example.ly/",
+              "verifiedAt": "2026-10-02",
+              "tag": "state",
+              "links": [
+                {
+                  "type": "web",
+                  "label": "الموقع الرسمي",
+                  "url": "https://example.ly/"
+                },
+                {
+                  "type": "web",
+                  "label": "الخدمة الإلكترونية",
+                  "url": "https://example.ly/service/"
+                },
+                {
+                  "type": "phone",
+                  "label": "اتصال",
+                  "phone": "+218910000000"
+                },
+                {
+                  "type": "email",
+                  "label": "البريد الإلكتروني",
+                  "url": "mailto:info@example.ly"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections_remove": [],
+  "hotels": [],
+  "newsFeeds": [
+    {
+      "name": "مصدر مثال",
+      "feeds": [
+        "https://example.ly/feed/"
+      ],
+      "site": "https://example.ly/",
+      "limit": 10
+    }
+  ]
+}
