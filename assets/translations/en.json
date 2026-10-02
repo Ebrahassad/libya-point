@@ -88,7 +88,7 @@
   "gold_note": "Raw value estimate = global price x market USD rate. Excludes making charges and jeweler margin.",
   "oil_title": "Oil (Brent)",
   "oil_barrel": "USD per barrel",
-  "oil_open_source": "View oil price at source",
+  "oil_open_source": "View oil price from NOC",
   "converter": "Currency converter",
   "amount": "Amount",
   "to_lyd": "in Libyan dinar",

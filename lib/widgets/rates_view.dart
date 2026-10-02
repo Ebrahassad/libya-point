@@ -118,19 +118,19 @@ class _RatesViewState extends State<RatesView> {
   }
 
   Widget _note(String text) => Padding(
-    padding: const EdgeInsets.only(top: 6),
-    child: Text(
-      text,
-      style: TextStyle(fontSize: 11, color: Theme.of(context).hintColor),
-    ),
-  );
+        padding: const EdgeInsets.only(top: 6),
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 11, color: Theme.of(context).hintColor),
+        ),
+      );
 
   Widget _failed(String key, VoidCallback retry) => Row(
-    children: [
-      Expanded(child: Text(key.tr())),
-      TextButton(onPressed: retry, child: Text('retry'.tr())),
-    ],
-  );
+        children: [
+          Expanded(child: Text(key.tr())),
+          TextButton(onPressed: retry, child: Text('retry'.tr())),
+        ],
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -231,10 +231,7 @@ class _RatesViewState extends State<RatesView> {
             OutlinedButton.icon(
               icon: const Icon(Icons.open_in_new, size: 18),
               label: Text('oil_open_source'.tr()),
-              onPressed: () => openUri(
-                context,
-                Uri.parse('https://oilprice.com/oil-price-charts/'),
-              ),
+              onPressed: () => openUri(context, Uri.parse('https://noc.ly/')),
             ),
           ],
         );
